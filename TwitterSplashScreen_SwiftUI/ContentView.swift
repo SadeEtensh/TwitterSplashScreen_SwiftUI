@@ -8,14 +8,41 @@
 import SwiftUI
 
 struct ContentView: View {
+    @State var isHomeRootScreen = false
+    @State var scaleAmount: CGFloat = 1
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundColor(.accentColor)
-            Text("Hello, world!")
-        }
-        .padding()
+        ZStack {
+            Color(.systemBlue)
+                    
+                    if isHomeRootScreen {
+                        HomeScreen()
+                    } else {
+                        Image("twitterlogo")
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .scaleEffect(scaleAmount)
+                            .frame(width: 80)
+                    }
+                }
+                .ignoresSafeArea()
+                .onAppear {
+                    // Shrinking  the icon
+                    withAnimation(.easeOut(duration: 0.5)) {
+                        scaleAmount = 0.6
+                    }
+                    
+                    // Enlarging the Twitter logo
+                    withAnimation(.easeInOut(duration: 1).delay(0.5)) {
+                        scaleAmount = 80
+
+                    }
+                    
+                    // What to Show after splash Screen..
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 2){
+                        isHomeRootScreen = true
+                    }
+                }
+        
     }
 }
 
