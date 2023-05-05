@@ -26,7 +26,7 @@ struct ContentView: View {
                 }
                 .ignoresSafeArea()
                 .onAppear {
-                    // Shrinking  the icon
+                    // Shrinking the icon - reduring its for a momment
                     withAnimation(.easeOut(duration: 0.5)) {
                         scaleAmount = 0.6
                     }
